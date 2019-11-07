@@ -21,25 +21,79 @@ produces:
 
 # Here begins the path descriptions
 paths:
-  /hello:
+  /get-data:
     # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
-    get:
-      description: Returns 'Hello' to the caller
+    x-swagger-router-controller: action-controller
+    post:
+      description: A data agnostic fetch API
       # used as the method name of the controller
-      operationId: hello
+      operationId: getData
       parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
+        - in: query
+          name: collection
           type: string
+          description: The name of collection to fetch
+          required: true
+        - in: body
+          name: filteroption
+          schema:
+            type: object
+          description: The filter to fetch specific records
+          required: false
       responses:
         "200":
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
+            $ref: "#/definitions/GetDataResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /save-data:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: action-controller
+    post:
+      description: A data agnostic save API
+      # used as the method name of the controller
+      operationId: postData
+      parameters:
+        - in: query
+          name: collection
+          type: string
+          description: The name of collection to save to
+          required: true
+        - in: body
+          name: record
+          schema:
+            type: object
+          description: The record to save to the collection
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetDataResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /get-collections:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: action-controller
+    get:
+      description: A data agnostic save API
+      # used as the method name of the controller
+      operationId: getAllCollectionNames
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetDataResponse"
         # responses may fall through to errors
         default:
           description: Error
@@ -48,22 +102,15 @@ paths:
   /swagger:
     x-swagger-pipe: swagger_raw
 
-
-
 # complex objects have schema definitions
 definitions:
-  HelloWorldResponse:
-    required:
-      - message
+  GetDataResponse:
     properties:
-      message:
-        type: string
+      data:
+        type: object
   ErrorResponse:
     required:
       - message
-      - code
     properties:
       message:
-        type: string
-      code:
         type: string
