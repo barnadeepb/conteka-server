@@ -12,8 +12,8 @@ FetchDataQueryConfig:
   type: object
   properties:
     filteroptions:
-      $ref: ./components/filter-options-config.yaml
+      $ref: components/filter-options-config.yaml
     paginateOptions:
-      $ref: ./components/pagination-config.yaml
+      $ref: components/pagination-config.yaml
     sortOptions:
-      $ref: ./components/sort-config.yaml
+      $ref: components/sort-config.yaml

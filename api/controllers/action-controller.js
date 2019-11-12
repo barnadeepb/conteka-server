@@ -10,12 +10,8 @@ module.exports = {
 function getData(req, res){
     // change here
     let collection = req.swagger.params.collection.value;
-    let retVal = accessor.getData(
-        req.db,
-        collection,
-        (req.swagger.params.filteroptions && req.swagger.params.filteroptions.value) || null,
-        (req.swagger.params.paginateOptions && req.swagger.params.paginateOptions.value) || null,
-        (req.swagger.params.sortOptions && req.swagger.params.sortOptions.value) || null);
+    let searchOptions = req.swagger.params.searchoptions && req.swagger.params.searchoptions.value;
+    let retVal = accessor.getData(req.db, collection, searchOptions.filteroptions, searchOptions.paginateOptions, searchOptions.sortOptions);
     res.json(retVal);
 }
 

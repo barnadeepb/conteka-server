@@ -1,3 +1,4 @@
+description: An array of objects with flags giving you control to perform complex SQL queries without the risk of SQL injection.
 type: array
 items:
   type: object

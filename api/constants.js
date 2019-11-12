@@ -9,13 +9,13 @@ module.exports = {
         "LT": "$lt",
         "LTE": "$lte",
         "RANGE": "$between",
-        "SETINCLUDE": "$in",
-        "SETEXCLUDE": "$nin",
+        "SET_INCLUDE": "$in",
+        "SET_EXCLUDE": "$nin",
         "CONTAINS": "$containsAny",
         "DATE": "$dteq"
     },
     "SORT_ORDER": {
-        "ASC": "ascending",
-        "DESC": "descending"
+        "ASCENDING": "asc",
+        "DESCENDING": "desc"
     }
 };

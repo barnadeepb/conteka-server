@@ -1,3 +1,4 @@
+description: An object which configures the sorting of the return record-set.
 type: object
 properties:
   fieldname:

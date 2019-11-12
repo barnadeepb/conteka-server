@@ -1,3 +1,4 @@
+description: An object which limits the result record-set based on offsets.
 type: object
 properties:
   offset:
