@@ -1,0 +1,38 @@
+type: array
+items:
+  type: object
+  properties:
+    fieldname:
+      type: string
+    mode:
+      type: string
+      enum:
+        - eq
+        - neq
+        - gt
+        - gte
+        - lt
+        - lte
+        - range
+        - set-include
+        - set-exclude
+        - contains
+        - date
+      description: >
+        Allowed values:
+          
+          * `eq` - This mode will do an exact match for the provided field with the provided value. Only the first value in the values array will be considered.
+          * `neq` - This mode will do an exact not-equal match for the provided field with the provided value. Only the first value in the values array will be considered.
+          * `gt` - This mode will do a greater than comparison for the provided field with the provided value. Only the first value in the values array will be considered.
+          * `gte` - This mode will do a greater-than-or-equal-to match for the provided field with the provided value. Only the first value in the values array will be considered.
+          * `lt` - This mode will do a a less than comparison for the provided field with the provided value. Only the first value in the values array will be considered.
+          * `lte` - This mode will do a less-than-or-equal-to match for the provided field with the provided value. Only the first value in the values array will be considered.
+          * `range` - This mode will check whether the record for the provided field-name lies within the range specified. Only the first and last element of the provided values array will be considered.
+          * `set-include` - This mode will match the record for the provided field-name against all provided values in the values array. The comparison will be for an exact match with the field value.
+          * `set-exclude` - This mode will match the record for the provided field-name for not having a value in the list of values provided in the values array.  The comparison will be for an exact match with the field value.
+          * `contains` - This mode will match the record for the provided field-name for having one or more keywords provided in the values array. This will be a partial match, not necessary an exact match.
+          * `date` - This mode will do an exact date match
+    values:
+      type: array
+      items:
+        type: string

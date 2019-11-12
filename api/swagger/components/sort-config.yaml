@@ -1,0 +1,15 @@
+type: object
+properties:
+  fieldname:
+    type: string
+    description: The field name on which the records will be sorted
+  sortorder:
+    type: string
+    enum:
+      - asc
+      - desc
+    description: >
+
+      * The order of the sort`:`
+      * asc - ascending
+      * desc - descending

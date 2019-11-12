@@ -1,0 +1,19 @@
+GetDataResponse:
+  properties:
+    data:
+      type: object
+ErrorResponse:
+  required:
+    - message
+  properties:
+    message:
+      type: string
+FetchDataQueryConfig:
+  type: object
+  properties:
+    filteroptions:
+      $ref: ./components/filter-options-config.yaml
+    paginateOptions:
+      $ref: ./components/pagination-config.yaml
+    sortOptions:
+      $ref: ./components/sort-config.yaml

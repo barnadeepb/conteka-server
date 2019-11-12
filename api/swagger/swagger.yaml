@@ -50,10 +50,8 @@ paths:
           description: The name of collection to fetch.
           required: true
         - in: body
-          name: filteroption
-          description: An object with flags giving you control to perform complex SQL queries without the risk of SQL injection.
           schema:
-            $ref: '#/definitions/QueryConfig'
+            $ref: '#/definitions/FetchDataQueryConfig'
       responses:
         "200":
           description: Success
@@ -94,26 +92,13 @@ paths:
   /swagger:
     x-swagger-pipe: swagger_raw
 
+# Tags are labels to group the APIs. Multiple tags can be applied to each API
 tags:
   - name: FetchRecords
     description: This group of APIs allows you to fetch records from the database
   - name: UpdateRecords
-    description: This group of APIs allows you to push/ update data in the database
+    description: This group of APIs allows you to push/ update data in the database   
+
 # complex objects have schema definitions
 definitions:
-  GetDataResponse:
-    properties:
-      data:
-        type: object
-  ErrorResponse:
-    required:
-      - message
-    properties:
-      message:
-        type: string
-  QueryConfig:
-    properties:
-      message:
-        type: string
-
-
+  $ref: .\definitions.yaml

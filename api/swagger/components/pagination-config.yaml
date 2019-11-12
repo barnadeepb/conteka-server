@@ -1,0 +1,10 @@
+type: object
+properties:
+  offset:
+    type: number
+    default: 0
+    description: If offset is n, the first n records would be ignored and the rest of the records would be provided.
+  limit:
+    type: number
+    default: 0
+    description: If limit is n, only n records would be returned (after the offset).

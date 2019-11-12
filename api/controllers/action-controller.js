@@ -8,9 +8,14 @@ module.exports = {
 };
 
 function getData(req, res){
+    // change here
     let collection = req.swagger.params.collection.value;
-    let filterOption = req.swagger.params.filteroption.value;
-    let retVal = accessor.getData(req.db, collection, filterOption);
+    let retVal = accessor.getData(
+        req.db,
+        collection,
+        (req.swagger.params.filteroptions && req.swagger.params.filteroptions.value) || null,
+        (req.swagger.params.paginateOptions && req.swagger.params.paginateOptions.value) || null,
+        (req.swagger.params.sortOptions && req.swagger.params.sortOptions.value) || null);
     res.json(retVal);
 }
 
