@@ -1,5 +1,5 @@
 module.exports = {
-    "projects": [
+    "projects-details": [
         {"name": "Apollo" },
         {"name": "Atlantis" },
         {"name": "Aurora" },
@@ -45,6 +45,14 @@ module.exports = {
         {"cid":"C0030","name":"Monica Zuccini","location":"Bangalore","yoe":"15","age":"38","resourceType":"HR","primarySkill":"Policies","secondarySkill":"Contract Management","vendor":"Tech Mahindra","status":"Available","introduction":"Monica zuccini is an amazing polier.","billRatePerHour":"22"}
     ],
     "requests": [],
-    "requestCandidates": [],
-    "tasks": []
+    "request-candidates": [],
+    "tasks": [],
+    "employees": [
+        {"name":"Thor","role":"vendor_manager"},
+        {"name":"Loki","role":"vendor_manager"},
+        {"name":"Stark","role":"vendor_manager"},
+        {"name":"Hawkeye","role":"vendor_manager"},
+        {"name":"Hulk","role":"vendor_manager"}
+    ],
+    "skills": [{"name":"Web Development"},{"name":"Finance"},{"name":"Project Management"},{"name":"FullStack"},{"name":"Automation"},{"name":"Java"},{"name":"C#"},{"name":"StrategyManagement"},{"name":"Product Owner"},{"name":"Angular"},{"name":"React"},{"name":"Scrummaster"},{"name":"Recruitment"},{"name":"Policies"},{"name":"Nodejs"},{"name":"Legal"},{"name":"Scrum master"},{"name":"Cloud"},{"name":"Robotics"},{"name":"WebDevelopment"},{"name":"Angular"},{"name":"C++"},{"name":"React"},{"name":"ProductManagement"},{"name":"Java"},{"name":"Testing"},{"name":"Recruitment"},{"name":"Policies"},{"name":"Contract Management"}]
 }

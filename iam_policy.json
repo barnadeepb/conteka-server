@@ -1,0 +1,10 @@
+{
+  "Version": "2019-11-12",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action":   [ "sns:Publish" ],
+      "Resource": [ "*" ]
+    }
+  ]
+}

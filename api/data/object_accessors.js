@@ -2,7 +2,7 @@
 
 module.exports = {
     getData,
-    postData,
+    insertOrUpdate,
     getAllCollectionNames
 };
 
@@ -10,7 +10,7 @@ function getData(dbRef, objName, keyValuePair ){
     return dbRef[objName].find(keyValuePair);
 }
 
-function postData(dbRef, objName, record ){
+function insertOrUpdate(dbRef, objName, record ){
     try{
         return dbRef[objName].insert(record);
     } catch(saveErr) {

@@ -17,7 +17,7 @@ function getData(req, res){
 function postData(req, res){
     let collection = req.swagger.params.collection.value;
     let record = req.swagger.params.record.value;
-    let retVal = accessor.postData(req.db, collection, record);
+    let retVal = accessor.insertOrUpdate(req.db, collection, record);
     res.json(retVal);
 }
 

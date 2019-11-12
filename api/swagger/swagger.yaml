@@ -18,45 +18,57 @@ consumes:
 produces:
   - application/json
 
-
 # Here begins the path descriptions
 paths:
+  /get-collections:
+    x-swagger-router-controller: action-controller
+    get:
+      tags:
+        - FetchRecords
+      description: A data agnostic save API
+      operationId: getAllCollectionNames
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetDataResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /get-data:
-    # binds a127 app logic to a route
     x-swagger-router-controller: action-controller
     post:
-      description: A data agnostic fetch API
-      # used as the method name of the controller
+      tags:
+        - FetchRecords
+      description: A data agnostic fetch API.
       operationId: getData
       parameters:
         - in: query
           name: collection
           type: string
-          description: The name of collection to fetch
+          description: The name of collection to fetch.
           required: true
         - in: body
           name: filteroption
+          description: An object with flags giving you control to perform complex SQL queries without the risk of SQL injection.
           schema:
-            type: object
-          description: The filter to fetch specific records
-          required: false
+            $ref: '#/definitions/QueryConfig'
       responses:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/GetDataResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
   /save-data:
-    # binds a127 app logic to a route
     x-swagger-router-controller: action-controller
     post:
+      tags:
+        - UpdateRecords
       description: A data agnostic save API
-      # used as the method name of the controller
       operationId: postData
       parameters:
         - in: query
@@ -74,27 +86,7 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
             $ref: "#/definitions/GetDataResponse"
-        # responses may fall through to errors
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-  /get-collections:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: action-controller
-    get:
-      description: A data agnostic save API
-      # used as the method name of the controller
-      operationId: getAllCollectionNames
-      responses:
-        "200":
-          description: Success
-          schema:
-            # a pointer to a definition
-            $ref: "#/definitions/GetDataResponse"
-        # responses may fall through to errors
         default:
           description: Error
           schema:
@@ -102,6 +94,11 @@ paths:
   /swagger:
     x-swagger-pipe: swagger_raw
 
+tags:
+  - name: FetchRecords
+    description: This group of APIs allows you to fetch records from the database
+  - name: UpdateRecords
+    description: This group of APIs allows you to push/ update data in the database
 # complex objects have schema definitions
 definitions:
   GetDataResponse:
@@ -114,3 +111,9 @@ definitions:
     properties:
       message:
         type: string
+  QueryConfig:
+    properties:
+      message:
+        type: string
+
+
