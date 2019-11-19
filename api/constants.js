@@ -19,8 +19,8 @@ module.exports = {
         "DESCENDING": "desc"
     },
     "MY_SQL_DETAILS": {
-        "host": "ec2-54-158-10-253.compute-1.amazonaws.com",
-        "user": "vinay",
-        "password": "Snow4004"
+        "host": "ha-ha-ha",
+        "user": "ha-ha-ha",
+        "password": "ha-ha-ha"
     }
 };
