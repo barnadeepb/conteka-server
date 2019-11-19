@@ -15,7 +15,8 @@
     "swagger-express-mw": "^0.1.0",
     "swagger-ui-express": "^4.1.2",
     "yamljs": "^0.3.0",
-    "merge-yaml": "^1.1.0"
+    "merge-yaml": "^1.1.0",
+    "moment": "^2.24.0"
   },
   "devDependencies": {
     "should": "^7.1.0",

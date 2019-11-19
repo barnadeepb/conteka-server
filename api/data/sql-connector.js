@@ -17,10 +17,13 @@ connection.connect(function(err) {
 });
 
 
-module.exports = function(query, callback) {
+module.exports = function(query) {
+  return new Promise((resolve, reject) => {
     connection.query(query, function (error, results, fields) {
-        if (error) throw error;
-        // connected!
-        callback(results);
-      });
+      if (error) {
+        reject(error);
+      };
+      resolve(results);
+    });
+  });
 }

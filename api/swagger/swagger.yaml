@@ -91,6 +91,34 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+  /save-request:
+    x-swagger-router-controller: request-controller
+    put:
+      tags:
+        - Request
+      description: This API would save the request object
+      operationId: saveRequest
+      parameters:
+        - in: query
+          name: isNew
+          type: boolean
+          description: This flag indicates whether to create or update a request.
+          required: true
+        - in: body
+          name: requestDetails
+          schema:
+            $ref: "#/definitions/SaveRequestBody"
+          description: This is a composite record which contains the request object, the details object and tasks related info
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetDataResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
 

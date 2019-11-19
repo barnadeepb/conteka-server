@@ -6,8 +6,6 @@ definitions:
       data:
         type: object
   ErrorResponse:
-    required:
-      - message
     properties:
       message:
         type: string
@@ -86,4 +84,63 @@ definitions:
               * The order of the sort`:`
               * asc - ascending
               * desc - descending
-
+  SaveRequestBody:
+    required:
+      - request_date
+      - yoe
+      - location
+      - start_date
+      - status
+      - end_date
+      - primary_skill
+      - resource_type
+      - project
+      - creatorId
+    type: object
+    properties:
+      request_id:
+        description: The id of an existing request.
+        type: string
+      request_date:
+        description: The date of creation of the request.
+        type: string
+      number:
+        description: Application generated request number.
+        type: string
+      yoe:
+        description: The average years of experience required by a candidate to be considered for this request.
+        type: string
+      location:
+        description: The location of the request. A reference to the system generated ID of location table.
+        type: string
+      start_date:
+        description: The start date of the request.
+        type: string
+      status:
+        description: The status of the request details object. Should be either "InProgress" or "Completed"
+        type: string
+      end_date:
+        description: The end date of the request.
+        type: string
+      primary_skill:
+        description: The primary skill. Lookup to skills table.
+        type: string
+      secondary_skill:
+        description: The secondary skill. Lookup to skills table.
+        type: string
+      resource_type:
+        description: The type of resource. Lookup to the resource_type table.
+        type: string
+      hr_notes:
+        description: Comments captured from the HR.
+        type: string
+      hiring_mgr_notes:
+        description: Comments captured from the hiring manager.
+        type: string
+      project:
+        description: The project for which this request would be submitted.
+        type: string
+      creatorId:
+        description: The user id of the person creating the request.
+        type: string
+      

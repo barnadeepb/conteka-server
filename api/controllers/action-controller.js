@@ -11,8 +11,12 @@ function getData(req, res){
     // change here
     let collection = req.swagger.params.collection.value;
     let searchOptions = req.swagger.params.searchoptions && req.swagger.params.searchoptions.value;
-    let retVal = accessor.getData(req.db, collection, searchOptions.filteroptions, searchOptions.paginateOptions, searchOptions.sortOptions);
-    res.json(retVal);
+    let retVal = accessor.getData(collection, searchOptions.filteroptions, searchOptions.paginateOptions, searchOptions.sortOptions);
+    return retVal.then(results => {
+        return res.json(results)
+    }).catch(err => {
+        return res.status(500).send({message: err.message})
+    });
 }
 
 function postData(req, res){
@@ -25,5 +29,7 @@ function postData(req, res){
 function getAllCollectionNames(req, res){
     accessor.getAllCollectionNames().then(results => {
         res.json(results);
-    })
+    }).catch(err => {
+        return res.status(500).send({message: err.message})
+    });
 }
