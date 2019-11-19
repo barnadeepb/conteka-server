@@ -3,14 +3,15 @@
 let SwaggerExpress = require('swagger-express-mw');
 let app = require('express')();
 const swaggerUi = require('swagger-ui-express');
-const YAML = require('yamljs');
-const swaggerDocument = YAML.load('./api/swagger/swagger.yaml');
+const mergeYaml  = require('merge-yaml');
+const swaggerDocument = mergeYaml(['./api/swagger/swagger.yaml', './api/swagger/definitions/definitions.yaml']);
 const db = require('./api/data/setup-data');
 
 module.exports = app; // for testing
 
 let config = {
-  appRoot: __dirname // required config
+  appRoot: __dirname, // required config,
+  swagger: swaggerDocument
 };
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
