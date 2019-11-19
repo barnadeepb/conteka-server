@@ -23,6 +23,7 @@ function postData(req, res){
 }
 
 function getAllCollectionNames(req, res){
-    let retVal = accessor.getAllCollectionNames(req.db);
-    res.json(retVal);
+    accessor.getAllCollectionNames().then(results => {
+        res.json(results);
+    })
 }

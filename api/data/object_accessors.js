@@ -1,5 +1,6 @@
 'use strict';
 let { QUERY_MODES, SORT_ORDER } = require("../constants");
+let QUERY_RUNNER = require("./sql-connector");
 
 module.exports = {
     getData,
@@ -70,6 +71,10 @@ function insertOrUpdate(dbRef, objName, record ){
     }
 }
 
-function getAllCollectionNames(dbRef) {
-    return Object.keys(dbRef);
+async function getAllCollectionNames(dbRef) {
+    return new Promise(function(resolve, reject) {
+        QUERY_RUNNER(`SELECT TABLE_NAME, TABLE_SCHEMA FROM information_schema.tables WHERE TABLE_SCHEMA = "CONTEKA"`,
+        (results) => resolve(results));
+    });
+    // return Object.keys(dbRef);
 }
