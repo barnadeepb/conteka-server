@@ -95,7 +95,7 @@ paths:
     x-swagger-router-controller: request-controller
     put:
       tags:
-        - Request
+        - Request Object
       description: This API would save the request object
       operationId: saveRequest
       parameters:
@@ -121,6 +121,33 @@ paths:
             $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
+  /get-highlights:
+    x-swagger-router-controller: common-tasks-controller
+    post:
+      tags:
+        - Common tasks
+      description: This API gets the data for the bubbles in the left nav section.
+      operationId: getData
+      parameters:
+        - in: query
+          name: collection
+          type: string
+          description: The name of collection to fetch.
+          required: true
+        - in: body
+          name: searchoptions
+          description: This object defines the various properties and flags which can be used to perform a refined search.
+          schema:
+            $ref: '#/definitions/SearchOptions'
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetDataResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
 # Tags are labels to group the APIs. Multiple tags can be applied to each API
 tags:
@@ -128,93 +155,3 @@ tags:
     description: This group of APIs allows you to fetch records from the database
   - name: UpdateRecords
     description: This group of APIs allows you to push/ update data in the database   
-
-# complex objects have schema definitions
-definitions:
-  GetDataResponse:
-    properties:
-      data:
-        type: object
-  ErrorResponse:
-    required:
-      - message
-    properties:
-      message:
-        type: string
-  SearchOptions:
-    type: object
-    properties:
-      filteroptions:
-        description: An array of objects with flags giving you control to perform complex SQL queries without the risk of SQL injection.
-        type: array
-        items:
-          type: object
-          properties:
-            fieldname:
-              description: The name of the object property which will be used to search.
-              type: string
-            values:
-              description: An array of search values.
-              type: array
-              items:
-                type: string
-            mode:
-              type: string
-              enum:
-                - eq
-                - neq
-                - gt
-                - gte
-                - lt
-                - lte
-                - range
-                - set_include
-                - set_exclude
-                - contains
-                - date
-              description: >
-                This is an enum based flag which lets you perform a specific type of search. Please chose one of the highlighted values from below.
-                Allowed values:
-                  
-                  * `eq` - This mode will do an exact match for the provided field with the provided value. Only the first value in the values array will be considered.
-                  * `neq` - This mode will do an exact not-equal match for the provided field with the provided value. Only the first value in the values array will be considered.
-                  * `gt` - This mode will do a greater than comparison for the provided field with the provided value. Only the first value in the values array will be considered.
-                  * `gte` - This mode will do a greater-than-or-equal-to match for the provided field with the provided value. Only the first value in the values array will be considered.
-                  * `lt` - This mode will do a a less than comparison for the provided field with the provided value. Only the first value in the values array will be considered.
-                  * `lte` - This mode will do a less-than-or-equal-to match for the provided field with the provided value. Only the first value in the values array will be considered.
-                  * `range` - This mode will check whether the record for the provided field-name lies within the range specified. Only the first and last element of the provided values array will be considered.
-                  * `set_include` - This mode will match the record for the provided field-name against all provided values in the values array. The comparison will be for an exact match with the field value.
-                  * `set_exclude` - This mode will match the record for the provided field-name for not having a value in the list of values provided in the values array.  The comparison will be for an exact match with the field value.
-                  * `contains` - This mode will match the record for the provided field-name for having one or more keywords provided in the values array. This will be a partial match, not necessary an exact match.
-                  * `date` - This mode will do an exact date match
-      paginateOptions:
-        description: An object which limits the result record-set based on offsets.
-        type: object
-        properties:
-          offset:
-            type: number
-            default: 0
-            description: If offset is n, the first n records would be ignored and the rest of the records would be provided.
-          limit:
-            type: number
-            default: 0
-            description: If limit is n, only n records would be returned (after the offset).
-      sortOptions:
-        description: An object which configures the sorting of the return record-set.
-        type: object
-        properties:
-          fieldname:
-            type: string
-            description: The field name on which the records will be sorted
-          sortorder:
-            type: string
-            enum:
-              - asc
-              - desc
-            description: >
-
-              * The order of the sort`:`
-              * asc - ascending
-              * desc - descending
-
-
