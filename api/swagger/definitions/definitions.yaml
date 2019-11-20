@@ -143,4 +143,27 @@ definitions:
       creatorId:
         description: The user id of the person creating the request.
         type: string
+  InsertQueryBody:
+    required:
+      - fields
+      - values
+    type: object
+    properties:
+      fields:
+        type: string
+        description: The values are a comma-separated list, for example - first_name='John',location=1,yoe=5.
+      values:
+        type: string
+        description: The search clause -- that which comes after where [Do not add where].
+  UpdateQueryBody:
+    required:
+      - values
+    type: object
+    properties:
+      filterClause:
+        type: string
+        description: The search clause -- that which comes after where [Do not add where].
+      values:
+        type: string
+        description: The values are a comma-separated list, for example - first_name='John',location=1,yoe=5.
       

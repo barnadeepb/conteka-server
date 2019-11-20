@@ -36,109 +36,112 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-  /get-data:
-    x-swagger-router-controller: action-controller
-    post:
-      tags:
-        - FetchRecords
-      description: A data agnostic fetch API.
-      operationId: getData
-      parameters:
-        - in: query
-          name: collection
-          type: string
-          description: The name of collection to fetch.
-          required: true
-        - in: body
-          name: searchoptions
-          description: This object defines the various properties and flags which can be used to perform a refined search.
-          schema:
-            $ref: '#/definitions/SearchOptions'
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/GetDataResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-  /save-data:
-    x-swagger-router-controller: action-controller
-    post:
-      tags:
-        - UpdateRecords
-      description: A data agnostic save API
-      operationId: postData
-      parameters:
-        - in: query
-          name: collection
-          type: string
-          description: The name of collection to save to
-          required: true
-        - in: body
-          name: record
-          schema:
-            type: object
-          description: The record to save to the collection
-          required: true
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/GetDataResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-  /save-request:
-    x-swagger-router-controller: request-controller
-    put:
-      tags:
-        - Request Object
-      description: This API would save the request object
-      operationId: saveRequest
-      parameters:
-        - in: query
-          name: isNew
-          type: boolean
-          description: This flag indicates whether to create or update a request.
-          required: true
-        - in: body
-          name: requestDetails
-          schema:
-            $ref: "#/definitions/SaveRequestBody"
-          description: This is a composite record which contains the request object, the details object and tasks related info
-          required: true
-      responses:
-        "200":
-          description: Success
-          schema:
-            $ref: "#/definitions/GetDataResponse"
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+  # /get-data:
+  #   x-swagger-router-controller: action-controller
+  #   post:
+  #     tags:
+  #       - FetchRecords
+  #     description: A data agnostic fetch API.
+  #     operationId: getData
+  #     parameters:
+  #       - in: query
+  #         name: collection
+  #         type: string
+  #         description: The name of collection to fetch.
+  #         required: true
+  #       - in: body
+  #         name: searchoptions
+  #         description: This object defines the various properties and flags which can be used to perform a refined search.
+  #         schema:
+  #           $ref: '#/definitions/SearchOptions'
+  #     responses:
+  #       "200":
+  #         description: Success
+  #         schema:
+  #           $ref: "#/definitions/GetDataResponse"
+  #       default:
+  #         description: Error
+  #         schema:
+  #           $ref: "#/definitions/ErrorResponse"
+  # /save-data:
+  #   x-swagger-router-controller: action-controller
+  #   post:
+  #     tags:
+  #       - UpdateRecords
+  #     description: A data agnostic save API
+  #     operationId: postData
+  #     parameters:
+  #       - in: query
+  #         name: collection
+  #         type: string
+  #         description: The name of collection to save to
+  #         required: true
+  #       - in: body
+  #         name: record
+  #         schema:
+  #           type: object
+  #         description: The record to save to the collection
+  #         required: true
+  #     responses:
+  #       "200":
+  #         description: Success
+  #         schema:
+  #           $ref: "#/definitions/GetDataResponse"
+  #       default:
+  #         description: Error
+  #         schema:
+  #           $ref: "#/definitions/ErrorResponse"
+  # /save-request:
+  #   x-swagger-router-controller: request-controller
+  #   put:
+  #     tags:
+  #       - Request Object
+  #     description: This API would save the request object
+  #     operationId: saveRequest
+  #     parameters:
+  #       - in: query
+  #         name: isNew
+  #         type: boolean
+  #         description: This flag indicates whether to create or update a request.
+  #         required: true
+  #       - in: body
+  #         name: requestDetails
+  #         schema:
+  #           $ref: "#/definitions/SaveRequestBody"
+  #         description: This is a composite record which contains the request object, the details object and tasks related info
+  #         required: true
+  #     responses:
+  #       "200":
+  #         description: Success
+  #         schema:
+  #           $ref: "#/definitions/GetDataResponse"
+  #       default:
+  #         description: Error
+  #         schema:
+  #           $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw
-  /get-highlights:
-    x-swagger-router-controller: common-tasks-controller
-    post:
+  /execute-select:
+    x-swagger-router-controller: crud-controller
+    get:
       tags:
-        - Common tasks
-      description: This API gets the data for the bubbles in the left nav section.
-      operationId: getData
+        - CRUD-APIs
+      description: select data from table.
+      operationId: executeSelect
       parameters:
         - in: query
-          name: collection
+          name: tableName
           type: string
           description: The name of collection to fetch.
           required: true
-        - in: body
-          name: searchoptions
-          description: This object defines the various properties and flags which can be used to perform a refined search.
-          schema:
-            $ref: '#/definitions/SearchOptions'
+        - in: query
+          name: filterClause
+          type: string
+          description: The search clause -- that which comes after where [Do not add where].
+        - in: query
+          name: optionsClause
+          type: string
+          description: The options clause, example -- ORDER BY field_name LIMIT number_of_records_to_return OFFSET number_of_records_to_skip.
       responses:
         "200":
           description: Success
@@ -148,10 +151,94 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
-
+  /execute-insert:
+    x-swagger-router-controller: crud-controller
+    post:
+      tags:
+        - CRUD-APIs
+      description: select data from table.
+      operationId: executeInsert
+      parameters:
+        - in: query
+          name: tableName
+          type: string
+          description: The name of collection to fetch.
+          required: true
+        - in: body
+          name: recordDetails
+          schema:
+            $ref: "#/definitions/InsertQueryBody"
+          description: This is a composite object which contains the details about the record
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetDataResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /execute-update:
+    x-swagger-router-controller: crud-controller
+    put:
+      tags:
+        - CRUD-APIs
+      description: select data from table.
+      operationId: executeUpdate
+      parameters:
+        - in: query
+          name: tableName
+          type: string
+          description: The name of collection to fetch.
+          required: true
+        - in: body
+          name: recordDetails
+          schema:
+            $ref: "#/definitions/UpdateQueryBody"
+          description: This is a composite object which contains the details about the record
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetDataResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /execute-delete:
+    x-swagger-router-controller: crud-controller
+    delete:
+      tags:
+        - CRUD-APIs
+      description: select data from table.
+      operationId: executeDelete
+      parameters:
+        - in: query
+          name: tableName
+          type: string
+          description: The name of the table from which to delete.
+          required: true
+        - in: query
+          name: filterClause
+          type: string
+          description: The search clause -- that which comes after where [Do not add where].
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetDataResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 # Tags are labels to group the APIs. Multiple tags can be applied to each API
 tags:
   - name: FetchRecords
-    description: This group of APIs allows you to fetch records from the database
-  - name: UpdateRecords
-    description: This group of APIs allows you to push/ update data in the database   
+    description: This group of APIs allows you to fetch records from the database.
+  # - name: UpdateRecords
+  #   description: This group of APIs allows you to push/ update data in the database.
+  - name: CRUD-APIs
+    description: This group of APIs are very generic. Just your every CRUD operations.
