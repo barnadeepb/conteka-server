@@ -2,7 +2,7 @@
 
 let path = require('path');
 let SwaggerExpress = require('swagger-express-mw');
-let app = require('express')();
+let express = require('express');
 const swaggerUi = require('swagger-ui-express');
 const mergeYaml  = require('merge-yaml');
 const swaggerDocument = mergeYaml([
@@ -10,7 +10,7 @@ const swaggerDocument = mergeYaml([
   path.join(__dirname, './server/api/swagger/definitions/definitions.yaml')
 ]);
 const db = require(path.join(__dirname, './server/api/data/setup-data'));
-
+let app = express();
 module.exports = app; // for testing
 
 let config = {
@@ -20,6 +20,7 @@ let config = {
 };
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+app.use('/', express.static(path.join(__dirname, 'build')))
 
 app.use(function (req, res, next) {
   // console.log('Time:', Date.now())
