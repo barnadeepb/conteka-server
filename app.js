@@ -4,8 +4,8 @@ let SwaggerExpress = require('swagger-express-mw');
 let app = require('express')();
 const swaggerUi = require('swagger-ui-express');
 const mergeYaml  = require('merge-yaml');
-const swaggerDocument = mergeYaml(['./api/swagger/swagger.yaml', './api/swagger/definitions/definitions.yaml']);
-const db = require('./api/data/setup-data');
+const swaggerDocument = mergeYaml(['./server/api/swagger/swagger.yaml', './server/api/swagger/definitions/definitions.yaml']);
+const db = require('./server/api/data/setup-data');
 
 module.exports = app; // for testing
 
