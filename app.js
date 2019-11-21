@@ -1,16 +1,21 @@
 'use strict';
 
+let path = require('path');
 let SwaggerExpress = require('swagger-express-mw');
 let app = require('express')();
 const swaggerUi = require('swagger-ui-express');
 const mergeYaml  = require('merge-yaml');
-const swaggerDocument = mergeYaml(['./server/api/swagger/swagger.yaml', './server/api/swagger/definitions/definitions.yaml']);
-const db = require('./server/api/data/setup-data');
+const swaggerDocument = mergeYaml([
+  path.join(__dirname, '/server/api/swagger/swagger.yaml'),
+  path.join(__dirname, './server/api/swagger/definitions/definitions.yaml')
+]);
+const db = require(path.join(__dirname, './server/api/data/setup-data'));
 
 module.exports = app; // for testing
 
 let config = {
-  appRoot: __dirname, // required config,
+  appRoot: path.join(__dirname, '/server'),
+  controllersDirs: [path.join(__dirname, '/server/api/controllers')],
   swagger: swaggerDocument
 };
 
