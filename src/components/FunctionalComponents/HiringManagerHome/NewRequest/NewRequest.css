@@ -1,0 +1,29 @@
+.req-modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.req-form {
+    padding: 3rem;
+    height: auto;
+    min-height: 50%;
+    min-width: 50%;
+}
+
+.req-form form {
+    width: 100%;
+    display: flex;
+}
+
+.req-form-control {
+    width: 100%;
+}
+
+.req-form .form-header {
+    padding-bottom: 3rem;
+}
+
+.MuiFormControl-marginNormal {
+    margin: 0 !important;
+}

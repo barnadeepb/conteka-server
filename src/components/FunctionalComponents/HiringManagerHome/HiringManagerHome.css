@@ -1,0 +1,8 @@
+.button-box{
+    display: flex;
+    margin: 1rem;
+}
+
+.button-box h6{
+    margin: 1rem;
+}

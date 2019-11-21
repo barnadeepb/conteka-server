@@ -1,0 +1,25 @@
+html, body, #root, .app-container, .MuiGrid-container {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    font-size: 14px;
+}
+
+.horizontal-box {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+  }
+  
+.vertical-box {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+.workspace-header {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+}

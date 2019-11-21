@@ -1,0 +1,17 @@
+.gauge-container {
+    display: flex;
+}
+
+/* Writing shitty CSS to do faster mockups */
+.gauge-container .gauge-value-display {
+}
+
+.gauge-container canvas {
+    margin: auto;
+}
+
+/*
+.gauge-container svg {
+    margin-left: 0.5rem !important;
+}
+*/

@@ -39,8 +39,13 @@
     "supertest": "^1.0.0"
   },
   "scripts": {
-    "start": "node app.js",
+    "start": "ui-build && node app.js",
     "test": "swagger project test",
-    "validate-swagger-doc": "swagger validate api/swagger/swagger.yaml"
+    "validate-swagger-doc": "swagger validate api/swagger/swagger.yaml",
+    "ui-start": "react-scripts start",
+    "ui-build": "react-scripts build",
+    "ui-serve": "serve",
+    "ui-test": "react-scripts test --env=jsdom",
+    "ui-eject": "react-scripts eject"
   }
 }
